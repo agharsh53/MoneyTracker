@@ -17,10 +17,10 @@ An MoneyTracker Android application 📱 built using Flutter 💙
 
 ## 🧾 MoneyTracker (Personal Finance App)
 - Tech Stack: Flutter, Dart, SQLite, fl_chart, SharedPreferences
-A responsive and visually interactive expense tracking app designed to help users manage and analyze personal finances locally.
-A simple and efficient Flutter-based **Money Tracker** app that helps users manage daily expenses, income, loans, and borrowings. 
-The app stores all data locally using SQLite and provides clear visual insights through dynamic charts and summary tables. 
-Daily notifications remind you of your spending activity, keeping your financial habits in check.
+- A responsive and visually interactive expense tracking app designed to help users manage and analyze personal finances locally.
+- A simple and efficient Flutter-based **Money Tracker** app that helps users manage daily expenses, income, loans, and borrowings. 
+- The app stores all data locally using SQLite and provides clear visual insights through dynamic charts and summary tables. 
+- Daily notifications remind you of your spending activity, keeping your financial habits in check.
 
 ---
 
