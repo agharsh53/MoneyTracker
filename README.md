@@ -5,7 +5,7 @@ An MoneyTracker Android application 📱 built using Flutter 💙
 
 ## ❤️ Try App
 ### 📲 Scan QR Code
-<img src="https://github.com/agharsh53/Amazon_Clone/blob/main/blob/screenshots/qr_moneytracker.png" width="300" height="300">  
+<img src="https://github.com/agharsh53/MoneyTracker/blob/main/blob/screenshots/qr_moneytracker.png" width="300" height="300">  
 
 
 ---
