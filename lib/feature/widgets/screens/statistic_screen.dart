@@ -16,6 +16,7 @@ import '../../../common/widgets/pie_chart_widget.dart';
 import '../../../common/widgets/statistic_list_tile.dart';
 
 import 'dart:ui';
+import '../../../database/local/aggregated_category_data.dart';
 import '../../../database/local/category.dart';
 import '../../../database/local/data_item.dart';
 import '../../../database/local/database_helper.dart';
@@ -127,6 +128,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedMonth', month);
     _calculateTotals();
+
   }
 
   void _showMonthPicker(BuildContext context) {
@@ -138,7 +140,8 @@ class _StatisticScreenState extends State<StatisticScreen> {
           onMonthSelected: (month) {
             setState(() {
               _selectedMonth = month;
-              _saveSelectedMonth(month); // Save the selected month
+              _saveSelectedMonth(month);
+              // Save the selected month
             });
           },
         );
@@ -440,39 +443,83 @@ class _StatisticScreenState extends State<StatisticScreen> {
   }
 
 
+  List<AggregatedCategoryData> _aggregateData(List<DataItem> dataItems) {
+    final Map<int, double> aggregatedAmounts = {};
+    final Map<int, Category> categories = {}; // To store the Category object
+
+    for (var item in dataItems) {
+      if (item.category != null) {
+        final categoryId = item.category!.id;
+        final amount = item.amount;
+
+        aggregatedAmounts.update(categoryId, (value) => value + amount,
+            ifAbsent: () => amount);
+        categories.putIfAbsent(categoryId, () => item.category!);
+      }
+    }
+
+    return aggregatedAmounts.entries.map((entry) {
+      final categoryId = entry.key;
+      final totalAmount = entry.value;
+      final category = categories[categoryId]!;
+      return AggregatedCategoryData(category: category, totalAmount: totalAmount);
+    }).toList();
+  }
+
 
   Widget _buildDataItemGrid() {
     return FutureBuilder<List<DataItem>>(
       future: dbHelper.getAllDataItems(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No transactions found.'));
+          return const Center(child: Text('No transactions found.'));
         }
 
+        // Filter items based on selected button and month
         final filteredItems = snapshot.data!
-            .where((item) => item.dataType == _selectedButton.toLowerCase() &&
-            ( item.category != null && _isSameMonth(item.dateTime, _selectedMonth)==true ))
+            .where((item) =>
+        item.dataType == _selectedButton.toLowerCase() &&
+            item.category != null &&
+            _isSameMonth(item.dateTime, _selectedMonth))
             .toList();
-        if (filteredItems.isEmpty) {
-          return Center(child: SingleChildScrollView(
-            child: Text('Add your first $_selectedButton to get started!',style: TextStyle(fontSize: 16 ,fontWeight: FontWeight.bold),),
-          ));
-        }
-        final percentage = _selectedButton=='Expense'?_totalExpense :_selectedButton == 'Income'? _totalIncome: _totalLoan;
-        return Column(
-          children: filteredItems.map((item) {
-            return StatisticListTile(
 
-                icon:item.category!.icon,
-                title:item.category!.name,
-                percentage: item.amount/percentage,
-                amount:item.amount,
-                color : item.category!.color,
-              onTap: ()=>_navigateToTransactionDetail(item),
+        // Aggregate the filtered items by category
+        final aggregatedData = _aggregateData(filteredItems);
+
+        if (aggregatedData.isEmpty) {
+          return Center(
+            child: SingleChildScrollView(
+              child: Text(
+                'Add your first $_selectedButton to get started!',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          );
+        }
+
+        // Calculate the total for percentage calculation
+        // This should match how _totalExpense, _totalIncome, _totalLoan are calculated.
+        // For simplicity, we can sum the aggregatedData amounts here if totals are not always up-to-date.
+        // If _totalExpense, _totalIncome, _totalLoan are guaranteed to be correct for the _selectedMonth, use them.
+        final double totalForPercentage = aggregatedData.fold(0.0, (sum, item) => sum + item.totalAmount);
+
+        // Fallback if totalForPercentage is zero to avoid division by zero
+        final displayPercentage = totalForPercentage == 0 ? 1.0 : totalForPercentage;
+
+
+        return Column(
+          children: aggregatedData.map((item) {
+            return StatisticListTile(
+              icon: item.category.icon, // Access icon from the aggregated category
+              title: item.category.name, // Access name from the aggregated category
+              percentage: item.totalAmount / displayPercentage, // Use totalAmount
+              amount: item.totalAmount, // Use totalAmount
+              color: item.category.color, // Access color from the aggregated category
+               // Removed, as this now represents aggregated data
             );
           }).toList(),
         );

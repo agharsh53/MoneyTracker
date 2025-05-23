@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/rendering.dart';
+import '../../database/local/aggregated_category_data.dart';
+import '../../database/local/category.dart';
 import '../../database/local/data_item.dart';
 import '../../database/local/database_helper.dart';
-
+import '../../database/local/data_item.dart';
+ // Import the new model
 
 class PieChartWidget extends StatefulWidget {
   final DatabaseHelper dbHelper;
@@ -30,14 +33,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   void initState() {
     super.initState();
     _calculateTotals();
-
-    setState(() {
-
-    });
-    // Load the selected month from SharedPreferences
   }
-
-
 
   Future<void> _calculateTotals() async {
     final items = await widget.dbHelper.getAllDataItems();
@@ -47,12 +43,12 @@ class _PieChartWidgetState extends State<PieChartWidget> {
 
     for (var item in items) {
       if (_isSameMonth(item.dateTime, widget.selectedMonth)) {
-        if (item.dataType == 'expense' || item.category.id==20) {
+        if (item.dataType == 'expense' || item.category.id == 20) {
           expense += item.amount;
-        } else if (item.dataType == 'income' || item.category.id==19) {
+        } else if (item.dataType == 'income' || item.category.id == 19) {
           income += item.amount;
         }
-        if(item.dataType == 'loan'){
+        if (item.dataType == 'loan') {
           loan += item.amount;
         }
       }
@@ -64,8 +60,34 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       _totalLoan = loan;
     });
   }
+
   bool _isSameMonth(DateTime date1, DateTime date2) {
     return date1.year == date2.year && date1.month == date2.month;
+  }
+
+  // New method to aggregate data by category
+  List<AggregatedCategoryData> _aggregateData(List<DataItem> dataItems) {
+    final Map<int, double> aggregatedAmounts = {};
+    final Map<int, Category> categories = {}; // To store the Category object
+
+    for (var item in dataItems) {
+      if (item.category != null) {
+        final categoryId = item.category.id;
+        final amount = item.amount;
+
+        aggregatedAmounts.update(categoryId, (value) => value + amount,
+            ifAbsent: () => amount);
+        categories.putIfAbsent(categoryId, () => item.category);
+      }
+    }
+
+    return aggregatedAmounts.entries.map((entry) {
+      final categoryId = entry.key;
+      final totalAmount = entry.value;
+      final category = categories[categoryId]!; // Get the stored Category object
+      return AggregatedCategoryData(
+          category: category, totalAmount: totalAmount);
+    }).toList();
   }
 
   @override
@@ -85,8 +107,17 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             item.category != null &&
             _isSameMonth(item.dateTime, widget.selectedMonth))
             .toList();
-        final percentage = widget.selectedButton=='Expense'?_totalExpense :widget.selectedButton == 'Income'? _totalIncome: _totalLoan;
-        if (filteredItems.isEmpty) {
+
+        // Aggregate the filtered items
+        final aggregatedData = _aggregateData(filteredItems);
+
+        final percentage = widget.selectedButton == 'Expense'
+            ? _totalExpense
+            : widget.selectedButton == 'Income'
+            ? _totalIncome
+            : _totalLoan;
+
+        if (aggregatedData.isEmpty) {
           return PieChart(
             PieChartData(
               sections: [
@@ -109,11 +140,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           );
         }
 
-
-        List<PieChartSectionData> sections = filteredItems.map((entry) {
+        List<PieChartSectionData> sections = aggregatedData.map((entry) {
           return PieChartSectionData(
-            value: entry.amount,
-            title: '${entry.category.name}\n${((entry.amount/percentage)*100).toStringAsFixed(0)}%',
+            value: entry.totalAmount, // Use totalAmount from aggregated data
+            title:
+            '${entry.category.name}\n${((entry.totalAmount / percentage) * 100).toStringAsFixed(0)}%',
             radius: 70,
             color: entry.category.color.withOpacity(0.8),
             titleStyle: const TextStyle(

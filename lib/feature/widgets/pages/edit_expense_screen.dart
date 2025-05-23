@@ -25,6 +25,8 @@ class _EditExpenseScreenState extends State<EditExpenseScreen> {
   TimeOfDay _selectedTime = TimeOfDay.now();
   Category? _selectedCategory;
   String _selectedButton = 'Expense';
+
+
   final dbHelper = DatabaseHelper();
   late Future<List<Category>> _categoryFuture;
 

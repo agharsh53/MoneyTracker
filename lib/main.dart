@@ -26,11 +26,13 @@ void main() async {
   Workmanager().registerPeriodicTask(
     "expenseSummaryTask",
     "expenseSummaryTask",
-    frequency: const Duration(hours: 12),
+    frequency: const Duration(hours: 1),
     initialDelay: const Duration(seconds: 10), // for testing
   );
 
   runApp(const MyApp());
+
+
 }
 
 void callbackDispatcher() {

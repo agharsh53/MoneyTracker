@@ -61,7 +61,7 @@ class _TransactionListTileState extends State<TransactionListTile> {
               ),
               child: Icon(widget.icon, color: widget.color,size: 20.0,)),
           title: Text(widget.title,style: TextStyle(fontWeight: FontWeight.bold),),
-          subtitle: Text('${widget.note} id: ${widget.itemId}'),
+          subtitle: Text('${widget.note}'),
           trailing: SizedBox(
 
               child: Column(

@@ -7,7 +7,6 @@ class StatisticListTile extends StatelessWidget {
   final double percentage;
   final double amount;
   final Color color;
-  final VoidCallback? onTap;
 
   const StatisticListTile({
     required this.icon,
@@ -15,7 +14,6 @@ class StatisticListTile extends StatelessWidget {
     required this.percentage,
     required this.amount,
     required this.color,
-    required this.onTap,
   });
 
   @override
@@ -23,7 +21,7 @@ class StatisticListTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          onTap: onTap,
+
           leading: Container(
             height: 40,
             width: 40,
