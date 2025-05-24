@@ -5,8 +5,7 @@ import '../../database/local/aggregated_category_data.dart';
 import '../../database/local/category.dart';
 import '../../database/local/data_item.dart';
 import '../../database/local/database_helper.dart';
-import '../../database/local/data_item.dart';
- // Import the new model
+
 
 class PieChartWidget extends StatefulWidget {
   final DatabaseHelper dbHelper;
