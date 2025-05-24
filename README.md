@@ -11,7 +11,7 @@ An MoneyTracker Android application 📱 built using Flutter 💙
 ---
 
 ### 📦 Get APK
-[Download here](https://drive.google.com/file/d/1xVgYSlB7W1o5MG9TaSLs7qdr1iH-yvhP/view?usp=drive_link)
+[Download here](https://drive.google.com/file/d/1zDhBn3uWEFVfadVqJLCWey7ZrHx0Ysdi/view?usp=drive_link)
 
 ---
 
