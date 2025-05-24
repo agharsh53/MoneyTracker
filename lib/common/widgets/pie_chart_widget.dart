@@ -144,7 +144,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           return PieChartSectionData(
             value: entry.totalAmount, // Use totalAmount from aggregated data
             title:
-            '${entry.category.name}\n${((entry.totalAmount / percentage) * 100).toStringAsFixed(0)}%',
+            '${((entry.totalAmount / percentage) * 100).toStringAsFixed(1)}%',
             radius: 70,
             color: entry.category.color.withOpacity(0.8),
             titleStyle: const TextStyle(
