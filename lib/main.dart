@@ -19,105 +19,70 @@ import 'package:permission_handler/permission_handler.dart'; // Import permissio
 void callbackDispatcher() {
   Workmanager().executeTask((taskName, inputData) async {
     final dbHelper = DatabaseHelper();
-
-    final FlutterLocalNotificationsPlugin notifications =
-        FlutterLocalNotificationsPlugin();
-
-// 1. Initialize FlutterLocalNotificationsPlugin in the background isolate
+    final FlutterLocalNotificationsPlugin notifications = FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings androidInit =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-
+    AndroidInitializationSettings('@mipmap/ic_launcher');
     const InitializationSettings initSettings =
-        InitializationSettings(android: androidInit);
+    InitializationSettings(android: androidInit);
 
-    await notifications.initialize(
-        initSettings); // No onDidReceive... callbacks here for background
-
-// 2. Ensure Notification Channel is created (Crucial for Android 8.0+)
+    await notifications.initialize(initSettings);
 
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
-      'daily_expense_summary_channel', // A unique ID for your channel
-
-      'Daily Expense Summary', // User-visible name
-
-      description:
-          'Provides a daily summary of your expenses.', // User-visible description
-
-      importance: Importance.max, // Max importance for heads-up notifications
-
-// No 'priority' parameter here for AndroidNotificationChannel
+      'daily_expense_summary_channel',
+      'Daily Expense Summary',
+      description: 'Provides a daily summary of your expenses.',
+      importance: Importance.max,
     );
 
     await notifications
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     if (taskName == "expenseSummaryTask") {
       final today = DateTime.now();
-
       final allItems = await dbHelper.getAllDataItems();
 
       final todayItems = allItems
           .where((item) =>
-              item.dateTime.year == today.year &&
-              item.dateTime.month == today.month &&
-              item.dateTime.day == today.day)
+      item.dateTime.year == today.year &&
+          item.dateTime.month == today.month &&
+          item.dateTime.day == today.day)
           .toList();
 
+      // ✅ Only show notification if there's at least one transaction with non-zero amount
       if (todayItems.isNotEmpty) {
-// Calculate min and max amounts
+        final nonZeroItems = todayItems.where((e) => e.amount > 0).toList();
 
-        double minAmount =
-            todayItems.map((e) => e.amount).reduce((a, b) => a < b ? a : b);
+        if (nonZeroItems.isNotEmpty) {
+          double minAmount = nonZeroItems.map((e) => e.amount).reduce((a, b) => a < b ? a : b);
+          double maxAmount = nonZeroItems.map((e) => e.amount).reduce((a, b) => a > b ? a : b);
 
-        double maxAmount =
-            todayItems.map((e) => e.amount).reduce((a, b) => a > b ? a : b);
-
-// Show notification
-
-        await notifications.show(
-          0, // Notification ID
-
-          "Daily Expense Summary 💸",
-
-          "Min: ₹${minAmount.toStringAsFixed(2)} | Max: ₹${maxAmount.toStringAsFixed(2)}",
-
-          NotificationDetails(
-            // Use the defined channel
-
-            android: AndroidNotificationDetails(
-              channel.id, // Use the channel ID
-
-              channel.name, // Use the channel name
-
-              channelDescription: channel.description,
-
-              importance: channel.importance, // Use channel's importance
-
-              priority: Priority
-                  .high, // Set priority here for the specific notification
-
-              icon:
-                  '@mipmap/ic_launcher', // Ensure icon is set for background notifications
-
-              ticker: 'Daily Expense Summary',
+          await notifications.show(
+            0,
+            "Daily Expense Summary 💸",
+            "Min: ₹${minAmount.toStringAsFixed(2)} | Max: ₹${maxAmount.toStringAsFixed(2)}",
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                importance: channel.importance,
+                priority: Priority.high,
+                icon: '@mipmap/ic_launcher',
+                ticker: 'Daily Expense Summary',
+              ),
             ),
-          ),
-
-          payload: 'daily_summary',
-        );
-
-        debugPrint("Daily Expense Summary Notification sent.");
-      } else {
-        debugPrint("No transactions for today. No summary notification sent.");
+            payload: 'daily_summary',
+          );
+        }
       }
     }
 
-    return Future.value(true); // Indicate task success
+    return Future.value(true);
   });
 }
+
 
 // --- Top-level function for background notification taps (required by flutter_local_notifications) ---
 
@@ -171,7 +136,7 @@ void main() async {
   await Workmanager().initialize(
     callbackDispatcher, // Your entry point for background tasks
 
-    isInDebugMode: true, // Set to false for release builds
+    isInDebugMode: false  , // Set to false for release builds
   );
 
 // Register periodic task for daily summary

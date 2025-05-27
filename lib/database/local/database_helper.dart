@@ -297,7 +297,7 @@ class DatabaseHelper {
       strftime('%m', datetime(dateTime / 1000, 'unixepoch')) AS month,
       SUM(CASE WHEN dataType = 'expense' THEN amount ELSE 0 END) AS expense,
       SUM(CASE WHEN dataType = 'income' THEN amount ELSE 0 END) AS income,
-      SUM(CASE WHEN dataType = 'loan' THEN amount ELSE 0 END) AS loan,
+      SUM(CASE WHEN categoryId = 19 THEN amount ELSE 0 END) AS loan,
       SUM(CASE WHEN categoryId = 20 THEN amount ELSE 0 END) AS borrow
     FROM data_items 
     WHERE strftime('%Y', datetime(dateTime / 1000, 'unixepoch')) = ?
