@@ -47,7 +47,7 @@ void callbackDispatcher() {
           .where((item) =>
       item.dateTime.year == today.year &&
           item.dateTime.month == today.month &&
-          item.dateTime.day == today.day)
+          item.dateTime.day == today.day && item.category == "expense")
           .toList();
 
       // ✅ Only show notification if there's at least one transaction with non-zero amount
@@ -146,7 +146,7 @@ void main() async {
 
     "expenseSummaryTask",
 
-    frequency: const Duration(hours: 12), // Run once every 24 hours
+    frequency: const Duration(hours: 24), // Run once every 24 hours
 
     initialDelay: const Duration(seconds: 30),
 
