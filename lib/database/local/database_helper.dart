@@ -218,7 +218,7 @@ class DatabaseHelper {
   Future<List<DataItem>> getAllDataItems() async {
     final db = await database;
 
-    final List<Map<String, dynamic>> maps = await db.query('data_items');
+    final List<Map<String, dynamic>> maps = await db.query('data_items',orderBy: 'dateTime DESC',);
 
     List<DataItem> items = [];
 

@@ -47,7 +47,7 @@ void callbackDispatcher() {
           .where((item) =>
       item.dateTime.year == today.year &&
           item.dateTime.month == today.month &&
-          item.dateTime.day == today.day && item.category == "expense")
+          item.dateTime.day == today.day && item.dataType == "expense")
           .toList();
 
       // ✅ Only show notification if there's at least one transaction with non-zero amount
