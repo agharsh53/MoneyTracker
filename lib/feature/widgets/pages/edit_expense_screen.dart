@@ -12,7 +12,7 @@ import '../../../database/local/database_helper.dart';
 class EditExpenseScreen extends StatefulWidget {
   final DataItem dataItem;
 
-  const EditExpenseScreen({Key? key, required this.dataItem}) : super(key: key);
+  const EditExpenseScreen({super.key, required this.dataItem});
 
   @override
   _EditExpenseScreenState createState() => _EditExpenseScreenState();
@@ -152,7 +152,7 @@ class _EditExpenseScreenState extends State<EditExpenseScreen> {
                         : Border.all(color: Colors.transparent),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Container(
+                  child: SizedBox(
                     height: 38,
                     width: 99,
                     child: Row(

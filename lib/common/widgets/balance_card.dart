@@ -6,7 +6,7 @@ class BalanceCard extends StatelessWidget {
   final Color color;
   final IconData icon;
 
-  BalanceCard({required this.title, required this.amount, required this.color, required this.icon});
+  const BalanceCard({super.key, required this.title, required this.amount, required this.color, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class BalanceCard extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width * 0.14,
           height: MediaQuery.of(context).size.height * 0.06,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(8),
@@ -30,14 +30,14 @@ class BalanceCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.white60,
                 ),
               ),
               Text(
                 amount,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

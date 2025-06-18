@@ -29,7 +29,7 @@ class _AddBudgetState extends State<AddBudget> {
     return Container(
       height: 260,
 
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
@@ -37,22 +37,22 @@ class _AddBudgetState extends State<AddBudget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Net Worth', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          SizedBox(height: 20),
+          const Text('Net Worth', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 20),
           SizedBox(
             height: 72,
             child: TextFormField(
               controller: budgetController,
               keyboardType: TextInputType.number,
-              style: TextStyle(fontSize: 25,color: Coloors.blueLight,fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 25,color: Coloors.blueLight,fontWeight: FontWeight.bold),
               decoration: InputDecoration(
 
                 hintText: 'Enter budget here',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(width: 2, color: Coloors.blueLight)),
+                hintStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: const BorderSide(width: 2, color: Coloors.blueLight)),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Coloors.blueLight, // your custom color
                     width: 2.0,
                   ),
@@ -61,7 +61,7 @@ class _AddBudgetState extends State<AddBudget> {
                 // ✅ Border when the TextField is focused
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Coloors.blueDark, // different color on focus (optional)
                     width: 2.0,
                   ),
@@ -69,7 +69,7 @@ class _AddBudgetState extends State<AddBudget> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -78,15 +78,15 @@ class _AddBudgetState extends State<AddBudget> {
                   child: OutlinedButton(
                     onPressed: () => Navigator.pop(context),
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(width: 1, color: Colors.white),
+                      side: const BorderSide(width: 1, color: Colors.white),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
                       backgroundColor: Colors.grey.withOpacity(0.3)
                     ),
-                    child: Text('Cancel', style: TextStyle(fontSize:18,color: Colors.black)),
+                    child: const Text('Cancel', style: TextStyle(fontSize:18,color: Colors.black)),
                   ),
                 ),
               ),
-              SizedBox(width: 40,),
+              const SizedBox(width: 40,),
               Expanded(
                 child: SizedBox(
                   height: 55,
@@ -97,11 +97,11 @@ class _AddBudgetState extends State<AddBudget> {
                       Navigator.pop(context);
                     },
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(width: 1.5,),
+                      side: const BorderSide(width: 1.5,),
                       backgroundColor: Coloors.blueLight,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
                     ),
-                    child: Text('Save', style: TextStyle(fontSize:18,color: Colors.white)),
+                    child: const Text('Save', style: TextStyle(fontSize:18,color: Colors.white)),
                   ),
                 ),
               ),

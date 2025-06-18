@@ -8,7 +8,7 @@ class SettingsItems extends StatelessWidget {
   final bool check;
   final VoidCallback onTap;
 
-  SettingsItems({
+  const SettingsItems({super.key, 
     required this.icon,
     required this.label,
     required this.value,
@@ -28,7 +28,7 @@ class SettingsItems extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(value),
-          check == true ? Icon(Icons.chevron_right) : SizedBox.shrink(), // Use SizedBox.shrink()
+          check == true ? const Icon(Icons.chevron_right) : const SizedBox.shrink(), // Use SizedBox.shrink()
         ],
       ),
       onTap: onTap,

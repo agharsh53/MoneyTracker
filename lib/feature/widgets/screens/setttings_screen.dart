@@ -74,7 +74,7 @@ class _SetttingsScreenState extends State<SetttingsScreen> {
           // Top Purple Section (Constant)
           Container(
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Coloors.blueLight,
@@ -89,11 +89,11 @@ class _SetttingsScreenState extends State<SetttingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Settings',
                       style: TextStyle(
                         fontSize: 30,
@@ -104,13 +104,13 @@ class _SetttingsScreenState extends State<SetttingsScreen> {
                     TextButton(onPressed: () async{
                       var sharedPref = await SharedPreferences.getInstance();
                       sharedPref.setBool(SplashScreenState.KEYLOGIN, false);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                    }, child: Text('Logout', style: TextStyle(fontSize: 25,color: Coloors.backgroundLight),))
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                    }, child: const Text('Logout', style: TextStyle(fontSize: 25,color: Coloors.backgroundLight),))
                   ],
                 ),
 
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -121,14 +121,14 @@ class _SetttingsScreenState extends State<SetttingsScreen> {
     bottom: 0,
     child: SingleChildScrollView(
     child: Container(
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
     color: Coloors.backgroundLight,
     borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
     ),
     child: Padding(
     padding: const EdgeInsets.all(22.0),
     child:
-    Container(
+    SizedBox(
     height: remainingHeight - 44, // Subtract padding
     child: ListView(
               children: <Widget>[
@@ -196,9 +196,9 @@ class _SetttingsScreenState extends State<SetttingsScreen> {
     {
       return LanguagePickerDialog(
 
-        title: Text('Select Your Language'),
+        title: const Text('Select Your Language'),
         isSearchable: true,
-        searchInputDecoration: InputDecoration(hintText: 'Search'),
+        searchInputDecoration: const InputDecoration(hintText: 'Search'),
         onValuePicked: (Language language) {
           setState(() {
             _selectedLanguage = language.name;
@@ -237,24 +237,24 @@ class _SetttingsScreenState extends State<SetttingsScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 50.0,
                 backgroundImage: NetworkImage('https://media.licdn.com/dms/image/v2/D5603AQGKrAt9AHFvAA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1703070971750?e=2147483647&v=beta&t=VJ5XP2Iqt91B-keuHWLJ_RTUSWayzTtv2g_xnWpovlo'), // Replace with user profile image
               ),
-              SizedBox(height: 16.0),
-              Text(username, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 16.0),
+              Text(username, style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8.0),
               Text(email),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context); // Close the modal
                 },
-                child: Text('Close'),
+                child: const Text('Close'),
               ),
             ],
           ),

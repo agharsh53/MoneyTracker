@@ -86,7 +86,7 @@ class DatabaseHelper {
     await db.insert('categories', Category(id: 6,
         name: 'Education',
         icon: Icons.book_outlined,
-        color: Color(0xffec407a),
+        color: const Color(0xffec407a),
         categoryType: CategoryType.expense).toMap()); // pink.shade400
     await db.insert('categories', Category(id: 7,
         name: 'Bills',
@@ -123,27 +123,27 @@ class DatabaseHelper {
     await db.insert('categories', Category(id: 13,
         name: 'Salary',
         icon: Icons.attach_money,
-        color: Color(0xff388e3c),
+        color: const Color(0xff388e3c),
         categoryType: CategoryType.income).toMap()); // green.shade700
     await db.insert('categories', Category(id: 14,
         name: 'Invest',
         icon: Icons.trending_up,
-        color: Color(0xff1976d2),
+        color: const Color(0xff1976d2),
         categoryType: CategoryType.income).toMap()); // blue.shade700
     await db.insert('categories', Category(id: 15,
         name: 'Business',
         icon: Icons.business,
-        color: Color(0xff00796b),
+        color: const Color(0xff00796b),
         categoryType: CategoryType.income).toMap()); // teal.shade700
     await db.insert('categories', Category(id: 16,
         name: 'Interest',
         icon: Icons.account_balance,
-        color: Color(0xfff57c00),
+        color: const Color(0xfff57c00),
         categoryType: CategoryType.income).toMap()); // orange.shade700
     await db.insert('categories', Category(id: 17,
         name: 'Extra Income',
         icon: Icons.monetization_on,
-        color: Color(0xffffa000),
+        color: const Color(0xffffa000),
         categoryType: CategoryType.income).toMap()); // amber.shade700
     await db.insert('categories', Category(id: 18,
         name: 'Other',
@@ -155,13 +155,13 @@ class DatabaseHelper {
     await db.insert('categories', Category(id: 19,
         name: 'Loan',
         icon: Icons.trending_up,
-        color: Color(
+        color: const Color(
             0xff1fc12b),
         categoryType: CategoryType.loan).toMap()); // green.shade900
     await db.insert('categories', Category(id: 20,
         name: 'Borrow',
         icon: Icons.trending_down,
-        color: Color(
+        color: const Color(
             0xfff73734),
         categoryType: CategoryType.loan).toMap()); // red.shade400
   }
@@ -272,7 +272,7 @@ class DatabaseHelper {
   Future<bool> DeleteDataItem({required int id}) async {
     final db = await database;
     int rowsEffected = await db.delete(
-        'data_items', where: "id = ?", whereArgs: ['${id}']);
+        'data_items', where: "id = ?", whereArgs: ['$id']);
     return rowsEffected > 0;
   }
 

@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _selectedMonth = '';
   String _selectedButton = 'Expense';
   String _searchText = ''; // Added search text state
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   double _totalExpense = 0;
   double _totalIncome = 0;
   bool _showBalance = false;
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
           categoryIcon: transaction.category.icon,
           categoryColor: transaction.category.color,
           note: '${transaction.note}',
-          categoryId: transaction.category.id!,
+          categoryId: transaction.category.id,
           dataType: transaction.dataType,
           itemId: transaction.id!,
         ),
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // Top Purple Section (Constant)
           Container(
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Coloors.blueLight, Coloors.blueDark,Coloors.blueLight2],
                 begin: FractionalOffset(0.5, 0.6),
@@ -157,24 +157,24 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '${_selectedMonth}'.trim(),
-                      style: TextStyle(
+                      _selectedMonth.trim(),
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                     TextButton(onPressed: ()=> _showMonthPicker(context),
-                        child: Icon(Icons.keyboard_arrow_down,color: Coloors.backgroundLight,size: 30,)),
+                        child: const Icon(Icons.keyboard_arrow_down,color: Coloors.backgroundLight,size: 30,)),
                   ],
                 ),
-                SizedBox(height: 10),
-                Container(
+                const SizedBox(height: 10),
+                SizedBox(
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Available Balance',
                             style: TextStyle(
                               fontSize: 16,
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           GestureDetector(
                             onTap: () {
                               setState(() {
@@ -206,13 +206,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
 
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
                         _showBalance
 
-                            ? '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome - _totalExpense)}'
+                            ? NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome - _totalExpense)
                             : '******',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Coloors.backgroundLight,
@@ -222,13 +222,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     BalanceCard(
                       title: 'Total Expense',
-                      amount: '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalExpense)}',
+                      amount: NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalExpense),
                       color: Colors.red,
                       icon: Icons.trending_down,
                     ),
@@ -239,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BalanceCard(
                       title: 'Total Income',
-                      amount: '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome)}',
+                      amount: NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome),
                       color: Colors.green,
                       icon: Icons.trending_up,
                     ),
@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 0,
             child: SingleChildScrollView(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Coloors.backgroundLight,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                 ),
@@ -274,9 +274,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 _selectedButton = value;
                               });
                             }),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
 
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         // Search Text Field
                         TextField(
                           controller: _searchController,
@@ -287,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           decoration: InputDecoration(
                             labelText: 'Search',
-                            prefixIcon: Icon(Icons.search, color: Coloors.blueLight,size: 30,),
+                            prefixIcon: const Icon(Icons.search, color: Coloors.blueLight,size: 30,),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(18)
                             ),
@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
 
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
 
                         _buildDataItemGrid(),
 
@@ -325,16 +325,16 @@ class _HomeScreenState extends State<HomeScreen> {
       future: dbHelper.getAllDataItems(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(child: SingleChildScrollView(
             child: Column(
               children: [
-                Container( height: 200,width: 200, child: Image.asset('assets/images/expense.png')),
-                Text('Add your first $_selectedButton to get started!',style: TextStyle(fontSize: 16 ,fontWeight: FontWeight.bold),),
-                SizedBox(height: 80,)
+                SizedBox( height: 200,width: 200, child: Image.asset('assets/images/expense.png')),
+                Text('Add your first $_selectedButton to get started!',style: const TextStyle(fontSize: 16 ,fontWeight: FontWeight.bold),),
+                const SizedBox(height: 80,)
               ],
             ),
           ));
@@ -342,8 +342,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         final filteredItems = snapshot.data!
             .where((item) => item.dataType == _selectedButton.toLowerCase() &&
-            ( item.category != null && _isSameMonth(item.dateTime, _selectedMonth)==true &&
-                (item.category!.name.toLowerCase().contains(_searchText.toLowerCase()) ||
+            ( _isSameMonth(item.dateTime, _selectedMonth)==true &&
+                (item.category.name.toLowerCase().contains(_searchText.toLowerCase()) ||
                     item.note!.toLowerCase().contains(_searchText.toLowerCase()) ||
                     item.amount.toString().contains(_searchText))))
             .toList();
@@ -351,9 +351,9 @@ class _HomeScreenState extends State<HomeScreen> {
           return Center(child: SingleChildScrollView(
             child: Column(
               children: [
-                Container( height: 200,width: 200, child: Image.asset('assets/images/expense.png')),
-                Text('Add your first $_selectedButton to get started!',style: TextStyle(fontSize: 16 ,fontWeight: FontWeight.bold),),
-                SizedBox(height: 80,)
+                SizedBox( height: 200,width: 200, child: Image.asset('assets/images/expense.png')),
+                Text('Add your first $_selectedButton to get started!',style: const TextStyle(fontSize: 16 ,fontWeight: FontWeight.bold),),
+                const SizedBox(height: 80,)
               ],
             ),
           ));
@@ -362,13 +362,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: filteredItems.map((item) {
             return TransactionListTile(
                 onTap: ()=>_navigateToTransactionDetail(item),
-                item.category!.icon,
-                item.category!.name,
+                item.category.icon,
+                item.category.name,
                 formatDate(item.dateTime),
                 '₹${item.amount.toStringAsFixed(0)}',
                 '${item.note}',
                 '${item.category.id}',
-                item.category!.color,
+                item.category.color,
                 item.dataType,
                 '${item.id}'
             );

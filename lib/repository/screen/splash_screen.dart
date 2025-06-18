@@ -25,7 +25,7 @@ class SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    _periodicTimer = Timer.periodic(Duration(milliseconds: 300), (Timer timer) {
+    _periodicTimer = Timer.periodic(const Duration(milliseconds: 300), (Timer timer) {
       if(mounted){
         setState(() {
           index++;
@@ -49,7 +49,7 @@ class SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Coloors.blueLight,Coloors.blueDark,Coloors.blueLight2
@@ -73,8 +73,8 @@ class SplashScreenState extends State<SplashScreen> {
                     child: Image.asset('assets/images/wallet.png',fit: BoxFit.fill,
                       width: double.infinity,
                       height: double.infinity,),),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     "Money Manage - Balance Budget",
                     style: TextStyle(
                       fontSize: 18,
@@ -82,7 +82,7 @@ class SplashScreenState extends State<SplashScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SpinKitThreeBounce( // Change to SpinKitThreeBounce
                     color: index.isEven ? Coloors.blueLight2 : Coloors.blueDark,
                     size: 50.0,
@@ -102,16 +102,16 @@ class SplashScreenState extends State<SplashScreen> {
   void whereToGo() async{
     var sharedPred = await SharedPreferences.getInstance();
     var isLoggedIn = sharedPred.getBool(KEYLOGIN);
-    Timer(Duration(seconds: 2),(){
+    Timer(const Duration(seconds: 2),(){
       if (!mounted) return;
       if(isLoggedIn!=null){
         if(isLoggedIn){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const HomePage()));
         }else{
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LoginScreen()));
         }
       }else{
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LoginScreen()));
       }
 
     });

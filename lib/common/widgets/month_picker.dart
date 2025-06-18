@@ -6,7 +6,7 @@ class MonthPicker extends StatefulWidget {
   final Function(String) onMonthSelected;
   final String initialMonth; // Add initialMonth parameter
 
-  MonthPicker({required this.onMonthSelected, required this.initialMonth});
+  const MonthPicker({super.key, required this.onMonthSelected, required this.initialMonth});
 
   @override
   _MonthPickerState createState() => _MonthPickerState();
@@ -37,7 +37,7 @@ class _MonthPickerState extends State<MonthPicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -48,7 +48,7 @@ class _MonthPickerState extends State<MonthPicker> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Selected Month', style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold)),
+              const Text('Selected Month', style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold)),
               MouseRegion(
                 onEnter: (_) => setState(() => _isThisMonthHovered = true),
                 onExit: (_) => setState(() => _isThisMonthHovered = false),
@@ -62,10 +62,10 @@ class _MonthPickerState extends State<MonthPicker> {
                   style: TextButton.styleFrom(
                     disabledBackgroundColor: Colors.tealAccent,
                     side: _isThisMonthHovered
-                        ? BorderSide(color: Colors.blue)
+                        ? const BorderSide(color: Colors.blue)
                         : null,
                   ),
-                  child: Text('This month'),
+                  child: const Text('This month'),
                 ),
               ),
             ],
@@ -74,16 +74,16 @@ class _MonthPickerState extends State<MonthPicker> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(Icons.chevron_left),
+                icon: const Icon(Icons.chevron_left),
                 onPressed: () {
                   setState(() {
                     _selectedYear -=1;
                   });
                 },
               ),
-              Text(_selectedYear.toString(), style: TextStyle(fontSize: 18.0)),
+              Text(_selectedYear.toString(), style: const TextStyle(fontSize: 18.0)),
               IconButton(
-                icon: Icon(Icons.chevron_right),
+                icon: const Icon(Icons.chevron_right),
                 onPressed: () {
                   setState(() {
                     _selectedYear+= 1;
@@ -92,11 +92,11 @@ class _MonthPickerState extends State<MonthPicker> {
               ),
             ],
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 2.0,
             ),
@@ -117,14 +117,14 @@ class _MonthPickerState extends State<MonthPicker> {
                     backgroundColor: _selectedMonth.startsWith(_months[index])
                         ? Coloors.blueLight
                         : Colors.grey[200],
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   ),
                   child: Text(_months[index]),
                 ),
               );
             },
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -132,17 +132,17 @@ class _MonthPickerState extends State<MonthPicker> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  widget.onMonthSelected('$_selectedMonth'); // Send the selected month
+                  widget.onMonthSelected(_selectedMonth); // Send the selected month
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Coloors.blueLight
                 ),
-                child: Text('Save', style: TextStyle(color: Coloors.backgroundLight)),
+                child: const Text('Save', style: TextStyle(color: Coloors.backgroundLight)),
               ),
             ],
           ),

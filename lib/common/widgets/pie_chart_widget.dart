@@ -13,11 +13,11 @@ class PieChartWidget extends StatefulWidget {
   final DateTime selectedMonth;
 
   const PieChartWidget({
-    Key? key,
+    super.key,
     required this.dbHelper,
     required this.selectedButton,
     required this.selectedMonth,
-  }) : super(key: key);
+  });
 
   @override
   State<PieChartWidget> createState() => _PieChartWidgetState();
@@ -70,15 +70,13 @@ class _PieChartWidgetState extends State<PieChartWidget> {
     final Map<int, Category> categories = {}; // To store the Category object
 
     for (var item in dataItems) {
-      if (item.category != null) {
-        final categoryId = item.category.id;
-        final amount = item.amount;
+      final categoryId = item.category.id;
+      final amount = item.amount;
 
-        aggregatedAmounts.update(categoryId, (value) => value + amount,
-            ifAbsent: () => amount);
-        categories.putIfAbsent(categoryId, () => item.category);
-      }
-    }
+      aggregatedAmounts.update(categoryId, (value) => value + amount,
+          ifAbsent: () => amount);
+      categories.putIfAbsent(categoryId, () => item.category);
+        }
 
     return aggregatedAmounts.entries.map((entry) {
       final categoryId = entry.key;
@@ -103,7 +101,6 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         final filteredItems = snapshot.data!
             .where((item) =>
         item.dataType == widget.selectedButton.toLowerCase() &&
-            item.category != null &&
             _isSameMonth(item.dateTime, widget.selectedMonth))
             .toList();
 

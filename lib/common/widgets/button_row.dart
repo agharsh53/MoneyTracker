@@ -7,7 +7,7 @@ class ButtonRow extends StatelessWidget {
   final String selectedButton;
   final Function(String) onButtonChanged;
 
-  ButtonRow({required this.selectedButton, required this.onButtonChanged});
+  const ButtonRow({super.key, required this.selectedButton, required this.onButtonChanged});
 
   @override
   Widget build(BuildContext context) {

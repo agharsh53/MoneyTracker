@@ -8,7 +8,7 @@ class StatisticListTile extends StatelessWidget {
   final double amount;
   final Color color;
 
-  const StatisticListTile({
+  const StatisticListTile({super.key, 
     required this.icon,
     required this.title,
     required this.percentage,
@@ -42,10 +42,10 @@ class StatisticListTile extends StatelessWidget {
           subtitle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: TextStyle(fontWeight: FontWeight.normal,fontStyle: FontStyle.italic)),
+              Text(title, style: const TextStyle(fontWeight: FontWeight.normal,fontStyle: FontStyle.italic)),
               Text(
-                '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(amount)}',
-                style: TextStyle(
+                NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(amount),
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class StatisticListTile extends StatelessWidget {
           ),
 
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }

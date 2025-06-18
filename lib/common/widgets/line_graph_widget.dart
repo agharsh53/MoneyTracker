@@ -10,11 +10,11 @@ class LineGraphWidget extends StatelessWidget {
   final DateTime selectedMonth;
 
   const LineGraphWidget({
-    Key? key,
+    super.key,
     required this.dbHelper,
     required this.selectedButton,
     required this.selectedMonth,
-  }) : super(key: key);
+  });
 
   bool _isSameMonth(DateTime date1, DateTime date2) {
     return date1.year == date2.year && date1.month == date2.month;
@@ -34,7 +34,6 @@ class LineGraphWidget extends StatelessWidget {
         final filteredItems = snapshot.data!
             .where((item) =>
         item.dataType == selectedButton.toLowerCase() &&
-            item.category != null &&
             _isSameMonth(item.dateTime, selectedMonth))
             .toList();
         List<LineChartBarData> lines;
@@ -48,13 +47,13 @@ class LineGraphWidget extends StatelessWidget {
                   isCurved: false,
                   barWidth: 3,
                   color: Colors.grey.shade400,
-                  dotData: FlDotData(show: true),
+                  dotData: const FlDotData(show: true),
                 ),
               ],
-              titlesData: FlTitlesData(show: true),
+              titlesData: const FlTitlesData(show: true),
               borderData: FlBorderData(show: true),
-              gridData: FlGridData(show: true),
-              lineTouchData: LineTouchData(enabled: false),
+              gridData: const FlGridData(show: true),
+              lineTouchData: const LineTouchData(enabled: false),
             ),
           );
         }
@@ -81,10 +80,10 @@ class LineGraphWidget extends StatelessWidget {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
-                dotData: FlDotData(show: true),
+                dotData: const FlDotData(show: true),
                 belowBarData: BarAreaData(
                   show: true,
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [
                       Color(0x801E88E5), // 50% opacity blue
                       Color(0x1026C6DA), // 6% opacity teal
@@ -118,10 +117,10 @@ class LineGraphWidget extends StatelessWidget {
                   reservedSize: 40,
                 ),
               ),
-              rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
             ),
-            gridData: FlGridData(show: true),
+            gridData: const FlGridData(show: true),
             borderData: FlBorderData(show: false),
             lineTouchData: LineTouchData(
               enabled: true,

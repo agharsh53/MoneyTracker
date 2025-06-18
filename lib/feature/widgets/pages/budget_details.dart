@@ -134,7 +134,7 @@ class _BudgetDetailsState extends State<BudgetDetails> {
         children: <Widget>[
           Container(
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Coloors.blueLight,
@@ -149,19 +149,19 @@ class _BudgetDetailsState extends State<BudgetDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Icon(
+                      child: const Icon(
                         Icons.keyboard_arrow_left,
                         color: Coloors.backgroundLight,
                         size: 40,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Budget Detail',
                       style: TextStyle(
                         fontSize: 30,
@@ -173,7 +173,7 @@ class _BudgetDetailsState extends State<BudgetDetails> {
 
                         TextButton(
                           onPressed: () => _showMonthPicker(context),
-                          child: Icon(
+                          child: const Icon(
                             Icons.calendar_month,
                             color: Coloors.backgroundLight,
                             size: 20,
@@ -182,7 +182,7 @@ class _BudgetDetailsState extends State<BudgetDetails> {
 
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -193,7 +193,7 @@ class _BudgetDetailsState extends State<BudgetDetails> {
             bottom: 0,
             child: SingleChildScrollView(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Coloors.backgroundLight,
                   borderRadius: BorderRadius.vertical(
                       top: Radius.circular(30), bottom: Radius.circular(30)),
@@ -215,7 +215,7 @@ class _BudgetDetailsState extends State<BudgetDetails> {
                                     lineWidth: 12.0,
                                     percent: percentage,
                                     progressColor: Coloors.blueLight,
-                                    backgroundColor: Color(0xE5D9D9EA),
+                                    backgroundColor: const Color(0xE5D9D9EA),
                                     center: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
@@ -242,21 +242,18 @@ class _BudgetDetailsState extends State<BudgetDetails> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      buildBudgetRow("Budget:", "${NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(_budget )
-                                      }"),
+                                      buildBudgetRow("Budget:", NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(_budget )),
                                       const SizedBox(height: 15),
-                                      buildBudgetRow("Expenses:", "${NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(_totalExpense )
-                                      }"),
+                                      buildBudgetRow("Expenses:", NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(_totalExpense )),
                                       const Divider(height: 30),
-                                      buildBudgetRow("Remain:", "${NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(_remaining)
-                                      }"),
+                                      buildBudgetRow("Remain:", NumberFormat.currency(locale: 'en_IN', symbol: '₹').format(_remaining)),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                 ),
-                            SizedBox(height: 50,),
+                            const SizedBox(height: 50,),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                               child: SizedBox(
@@ -266,17 +263,17 @@ class _BudgetDetailsState extends State<BudgetDetails> {
                                   onPressed: () {
                                        _showAddBudget(context);
                                   },
-                                  child: Text('Add Budget'),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Coloors.blueLight,
                                     foregroundColor: Colors.white,
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                         BorderRadius.circular(18)),
                                   ),
+                                  child: Text('Add Budget'),
                                 ),
                               ),
                             ),
@@ -303,7 +300,7 @@ class _BudgetDetailsState extends State<BudgetDetails> {
           const TextStyle(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w500),
         ),
         Text(
-          '${amount.substring(0,amount.length-3)}',
+          amount.substring(0,amount.length-3),
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ],

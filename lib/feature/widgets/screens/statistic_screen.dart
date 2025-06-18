@@ -159,7 +159,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
           categoryIcon: transaction.category.icon,
           categoryColor: transaction.category.color,
           note: '${transaction.note}',
-          categoryId: transaction.category.id!,
+          categoryId: transaction.category.id,
           dataType: transaction.dataType,
           itemId: transaction.id!,
         ),
@@ -184,7 +184,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
           // Top Purple Section (Constant)
           Container(
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Coloors.blueLight, Coloors.blueDark,Coloors.blueLight2],
                 begin: FractionalOffset(0.5, 0.6),
@@ -195,8 +195,8 @@ class _StatisticScreenState extends State<StatisticScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10,),
-                Text(
+                const SizedBox(height: 10,),
+                const Text(
                   'Statistics',
                   style: TextStyle(
                     fontSize: 29,
@@ -205,8 +205,8 @@ class _StatisticScreenState extends State<StatisticScreen> {
                   ),
                 ),
 
-                SizedBox(height: 20),
-                Container(
+                const SizedBox(height: 20),
+                SizedBox(
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,7 +227,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text(
+                              const Text(
                                 'Available Balance',
                                 style: TextStyle(
                                   fontSize: 18,
@@ -236,8 +236,8 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                 ),
                               ),
                               Text(
-                                '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome - _totalExpense)}',
-                                style: TextStyle(
+                                NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome - _totalExpense),
+                                style: const TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                   color: Coloors.backgroundLight,
@@ -253,13 +253,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: TextButton(
-                            onPressed:()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> StatisticDetail())),
-                            child: Icon(Icons.keyboard_arrow_right,color: Coloors.backgroundLight,size: 40,)),
+                            onPressed:()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> const StatisticDetail())),
+                            child: const Icon(Icons.keyboard_arrow_right,color: Coloors.backgroundLight,size: 40,)),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
               ],
             ),
@@ -277,7 +277,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
             child: SingleChildScrollView(
 
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Coloors.backgroundLight,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                 ),
@@ -293,7 +293,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                       });
                                     }),
 
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
@@ -303,14 +303,14 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '${_selectedMonth}'.trim(),
-                                            style: TextStyle(
+                                            _selectedMonth.trim(),
+                                            style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                           TextButton(onPressed: ()=> _showMonthPicker(context),
-                                              child: Icon(Icons.keyboard_arrow_down,size: 30,)),
+                                              child: const Icon(Icons.keyboard_arrow_down,size: 30,)),
                                         ],
                                       ),
 
@@ -324,10 +324,10 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                     Container(
                                       decoration: BoxDecoration(
                                         color: Coloors.blueLight2.withOpacity(0.1), // Move color into BoxDecoration
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight:Radius.circular(10) ),
+                                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight:Radius.circular(10) ),
                                       ),
                                       child: ConstrainedBox(
-                                        constraints: BoxConstraints(maxHeight: 350), // Adjust the height as needed
+                                        constraints: const BoxConstraints(maxHeight: 350), // Adjust the height as needed
                                         child: _buildChart(), //Removed expanded
                                       ),
                                     ),
@@ -336,19 +336,19 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                         color: Coloors.blueLight2.withOpacity(0.1),
-                                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight:Radius.circular(10) ),
+                                        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight:Radius.circular(10) ),
                                       ),
                                       child: ConstrainedBox(
-                                        constraints: BoxConstraints(maxHeight: 320),
+                                        constraints: const BoxConstraints(maxHeight: 320),
                                         child: Padding( // Add Padding
                                           padding: const EdgeInsets.all(8.0), // Optional: Add padding around chart
                                           child:  _buildCategoryGridLegend(),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 8,),
+                                    const SizedBox(height: 8,),
                                     _buildDataItemGrid(),
-                                  SizedBox(height: 50,)],
+                                  const SizedBox(height: 50,)],
             ),
                                 ]),),
 
@@ -417,10 +417,10 @@ class _StatisticScreenState extends State<StatisticScreen> {
                         shape: BoxShape.circle,
                       ),
                     ),
-                    SizedBox(width: 2,),
+                    const SizedBox(width: 2,),
                     Text(
                       category.name,
-                      style: TextStyle(fontSize: 10),
+                      style: const TextStyle(fontSize: 10),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
                     ),
@@ -448,15 +448,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
     final Map<int, Category> categories = {}; // To store the Category object
 
     for (var item in dataItems) {
-      if (item.category != null) {
-        final categoryId = item.category!.id;
-        final amount = item.amount;
+      final categoryId = item.category!.id;
+      final amount = item.amount;
 
-        aggregatedAmounts.update(categoryId, (value) => value + amount,
-            ifAbsent: () => amount);
-        categories.putIfAbsent(categoryId, () => item.category!);
-      }
-    }
+      aggregatedAmounts.update(categoryId, (value) => value + amount,
+          ifAbsent: () => amount);
+      categories.putIfAbsent(categoryId, () => item.category!);
+        }
 
     return aggregatedAmounts.entries.map((entry) {
       final categoryId = entry.key;
@@ -483,7 +481,6 @@ class _StatisticScreenState extends State<StatisticScreen> {
         final filteredItems = snapshot.data!
             .where((item) =>
         item.dataType == _selectedButton.toLowerCase() &&
-            item.category != null &&
             _isSameMonth(item.dateTime, _selectedMonth))
             .toList();
 

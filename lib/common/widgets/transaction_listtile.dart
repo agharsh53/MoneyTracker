@@ -15,7 +15,7 @@ class TransactionListTile extends StatefulWidget {
   final String dataType;
   final String itemId ;
   final VoidCallback? onTap;
-  TransactionListTile(this.icon, this.title, this.subtitle, this.trailing, this.note, this.id, this.color, this.dataType, this.itemId, {this.onTap});
+  const TransactionListTile(this.icon, this.title, this.subtitle, this.trailing, this.note, this.id, this.color, this.dataType, this.itemId, {super.key, this.onTap});
 
   @override
   State<TransactionListTile> createState() => _TransactionListTileState();
@@ -39,13 +39,13 @@ class _TransactionListTileState extends State<TransactionListTile> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${datePart}',
-              style: TextStyle(
+              datePart,
+              style: const TextStyle(
                   fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Text(
               widget.trailing,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
@@ -60,21 +60,21 @@ class _TransactionListTileState extends State<TransactionListTile> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(widget.icon, color: widget.color,size: 20.0,)),
-          title: Text(widget.title,style: TextStyle(fontWeight: FontWeight.bold),),
-          subtitle: Text('${widget.note}'),
+          title: Text(widget.title,style: const TextStyle(fontWeight: FontWeight.bold),),
+          subtitle: Text(widget.note),
           trailing: SizedBox(
 
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              int.parse(widget.id) <= 12 || int.parse(widget.id)==20 ? Text('-${widget.trailing}', style: TextStyle(color: Colors.red,fontSize: 16)):  Text(widget.trailing, style: TextStyle(color: Colors.green,fontSize: 16)) ,
-              Text(timePart,style: TextStyle(color: Colors.grey),)
+              int.parse(widget.id) <= 12 || int.parse(widget.id)==20 ? Text('-${widget.trailing}', style: const TextStyle(color: Colors.red,fontSize: 16)):  Text(widget.trailing, style: const TextStyle(color: Colors.green,fontSize: 16)) ,
+              Text(timePart,style: const TextStyle(color: Colors.grey),)
             ],
           )),
         ),
         Container(width: MediaQuery.of(context).size.width,height: 1,color: Coloors.greyLight,),
-        SizedBox(height: 11,)
+        const SizedBox(height: 11,)
       ],
     );
   }

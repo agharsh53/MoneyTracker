@@ -4,7 +4,7 @@ class Button extends StatelessWidget {
   final bool isSelected;
   final Function(String) onButtonChanged;
 
-  Button({required this.label, required this.isSelected,required this.onButtonChanged});
+  const Button({super.key, required this.label, required this.isSelected,required this.onButtonChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,9 @@ class Button extends StatelessWidget {
         onButtonChanged(label);
       },
       child: Container(
-        margin: EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
         height: 45,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: isSelected ? Colors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(8),

@@ -8,10 +8,10 @@ class CategoryCard extends StatelessWidget {
   final bool isSelected; // Add this
 
   const CategoryCard({
-    Key? key,
+    super.key,
     required this.category,
     this.isSelected = false, // Default to false
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +30,10 @@ class CategoryCard extends StatelessWidget {
             color: category.color,
             size: 30,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             category.name,
-            style: TextStyle(fontSize: 12),
+            style: const TextStyle(fontSize: 12),
             textAlign: TextAlign.center,
           ),
         ],

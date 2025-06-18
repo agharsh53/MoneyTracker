@@ -9,11 +9,11 @@ class BarChartWidget extends StatelessWidget {
   final DateTime selectedMonth;
 
   const BarChartWidget({
-    Key? key,
+    super.key,
     required this.dbHelper,
     required this.selectedButton,
     required this.selectedMonth,
-  }) : super(key: key);
+  });
 
   bool _isSameMonth(DateTime date1, DateTime date2) {
     return date1.year == date2.year && date1.month == date2.month;
@@ -33,7 +33,6 @@ class BarChartWidget extends StatelessWidget {
         final filteredItems = snapshot.data!
             .where((item) =>
         item.dataType == selectedButton.toLowerCase() &&
-            item.category != null &&
             _isSameMonth(item.dateTime, selectedMonth))
             .toList();
 
@@ -58,7 +57,7 @@ class BarChartWidget extends StatelessWidget {
                       ],
                     ),
                   ],
-                  gridData: FlGridData(show: false),
+                  gridData: const FlGridData(show: false),
                   borderData: FlBorderData(show: false),
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
@@ -78,16 +77,16 @@ class BarChartWidget extends StatelessWidget {
                           return SideTitleWidget(
                             axisSide: meta.axisSide,
                             space: 6,
-                            child: Text(
+                            child: const Text(
                               'No Data',
-                              style: const TextStyle(fontSize: 12, color: Colors.black45),
+                              style: TextStyle(fontSize: 12, color: Colors.black45),
                             ),
                           );
                         },
                       ),
                     ),
-                    topTitles: AxisTitles(),
-                    rightTitles: AxisTitles(),
+                    topTitles: const AxisTitles(),
+                    rightTitles: const AxisTitles(),
                   ),
                 ),
               ),
@@ -131,7 +130,7 @@ class BarChartWidget extends StatelessWidget {
               BarChartData(
                 maxY: roundedMaxY.toDouble(),
                 barGroups: barGroups,
-                gridData: FlGridData(show: false),
+                gridData: const FlGridData(show: false),
                 borderData: FlBorderData(show: false),
                 titlesData: FlTitlesData(
                   leftTitles: AxisTitles(
@@ -161,8 +160,8 @@ class BarChartWidget extends StatelessWidget {
                       },
                     ),
                   ),
-                  topTitles: AxisTitles(),
-                  rightTitles: AxisTitles(),
+                  topTitles: const AxisTitles(),
+                  rightTitles: const AxisTitles(),
                 ),
               ),
             ),

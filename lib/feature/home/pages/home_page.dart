@@ -17,18 +17,18 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreen(),
-    StatisticScreen(),
-    BudgetScreen(),
-    SetttingsScreen(),
+    const HomeScreen(),
+    const StatisticScreen(),
+    const BudgetScreen(),
+    const SetttingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      Icon(Icons.home, size: 30,),
-      Icon(Icons.analytics, size: 30,),
-      Icon(Icons.add, size: 30,),
-      Icon(Icons.settings, size: 30,),
+      const Icon(Icons.home, size: 30,),
+      const Icon(Icons.analytics, size: 30,),
+      const Icon(Icons.add, size: 30,),
+      const Icon(Icons.settings, size: 30,),
     ];
     return Scaffold(
 
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
 
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 14,
         elevation: 5,
         child: Row(
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             _buildNavItem(Icons.home, "Home", 0),
             _buildNavItem(Icons.pie_chart, "Statistics", 1),
-            SizedBox(width: 40), // Space for FAB
+            const SizedBox(width: 40), // Space for FAB
             _buildNavItem(Icons.account_balance_wallet, "Budget", 2),
             _buildNavItem(Icons.settings, "Settings", 3),
           ],
@@ -52,14 +52,14 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> AddExpensesScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddExpensesScreen()));
         },
         elevation: 0,
-        shape: CircleBorder(
+        shape: const CircleBorder(
           side: BorderSide(color: Colors.blueAccent, width: 12,style: BorderStyle.solid)
         ),
         backgroundColor: Colors.white,
-        child: Icon(Icons.add, size: 32, color: Colors.blueAccent, ),
+        child: const Icon(Icons.add, size: 32, color: Colors.blueAccent, ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

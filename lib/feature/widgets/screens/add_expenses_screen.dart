@@ -9,7 +9,7 @@ import '../../../database/local/data_item.dart';
 import '../../../database/local/database_helper.dart';
 
 class AddExpensesScreen extends StatefulWidget {
-  const AddExpensesScreen({Key? key}) : super(key: key);
+  const AddExpensesScreen({super.key});
 
   @override
   _AddExpensesScreenState createState() => _AddExpensesScreenState();
@@ -197,7 +197,7 @@ class _AddExpensesScreenState extends State<AddExpensesScreen> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   },
                   child: const Text('Cancel', style: TextStyle(fontSize: 22, color: Coloors.backgroundDark)),

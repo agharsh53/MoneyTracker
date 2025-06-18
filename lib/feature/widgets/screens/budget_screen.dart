@@ -136,7 +136,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
         children: <Widget>[
           Container(
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Coloors.blueLight,
@@ -151,11 +151,11 @@ class _BudgetScreenState extends State<BudgetScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Budget',
                       style: TextStyle(
                         fontSize: 29,
@@ -166,15 +166,15 @@ class _BudgetScreenState extends State<BudgetScreen> {
                     Row(
                       children: [
                         Text(
-                          '$_selectedMonth'.trim(),
-                          style: TextStyle(
+                          _selectedMonth.trim(),
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,
                           ),
                         ),
                         TextButton(
                           onPressed: () => _showMonthPicker(context),
-                          child: Icon(
+                          child: const Icon(
                             Icons.keyboard_arrow_down,
                             color: Coloors.backgroundLight,
                             size: 20,
@@ -184,7 +184,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,7 +202,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Budget',
                               style: TextStyle(
                                 fontSize: 18,
@@ -211,8 +211,8 @@ class _BudgetScreenState extends State<BudgetScreen> {
                               ),
                             ),
                             Text(
-                              '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_remaining)}',
-                              style: TextStyle(
+                              NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_remaining),
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 color: Coloors.backgroundLight,
@@ -223,10 +223,10 @@ class _BudgetScreenState extends State<BudgetScreen> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 20),
                       child: TextButton(
                         onPressed: () => _showAddBudget(context),
-                        child: Icon(
+                        child: const Icon(
                           Icons.drive_file_rename_outline_outlined,
                           color: Coloors.backgroundLight,
                           size: 30,
@@ -235,7 +235,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -246,7 +246,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
             bottom: 0,
             child: SingleChildScrollView(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Coloors.backgroundLight,
                   borderRadius: BorderRadius.vertical(
                       top: Radius.circular(30), bottom: Radius.circular(30)),
@@ -265,7 +265,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
                               lineWidth: 25.0,
                               percent: percentage,
                               progressColor: Coloors.blueLight,
-                              backgroundColor: Color(0xE5D9D9EA),
+                              backgroundColor: const Color(0xE5D9D9EA),
                               center: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -284,7 +284,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
                                 padding: const EdgeInsets.only(top: 16.0),
                                 child: Text(
                                   'Expenses: ${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalExpense)}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17.0,
                                   ),
@@ -292,25 +292,25 @@ class _BudgetScreenState extends State<BudgetScreen> {
                               ),
                               circularStrokeCap: CircularStrokeCap.round,
                             ),
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
                             SizedBox(
                               width: double.infinity,
                               height: 50,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> BudgetDetails()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const BudgetDetails()));
                                 },
-                                child: Text('Budget Detail'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Coloors.blueLight,
                                   foregroundColor: Colors.white,
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                       BorderRadius.circular(10)),
                                 ),
+                                child: Text('Budget Detail'),
                               ),
                             ),
                           ],

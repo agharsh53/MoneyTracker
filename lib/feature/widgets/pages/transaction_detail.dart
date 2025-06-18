@@ -49,7 +49,7 @@ class _TransactionDetailState extends State<TransactionDetail> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.keyboard_arrow_left,
               size: 40,
             )),
@@ -143,25 +143,25 @@ class _TransactionDetailState extends State<TransactionDetail> {
             Center(
               child: Column(children: [
                 Text(
-                  '${DateFormat('EEE, dd MMM').format(widget.date)}',
-                  style: TextStyle(
+                  DateFormat('EEE, dd MMM').format(widget.date),
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 widget.categoryId <= 12 || widget.categoryId == 20
                     ? Text(
                     '-${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(widget.amount)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
                         ),
                       )
                     : Text(
-                  '${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(widget.amount)}',
-                        style: TextStyle(
+                  NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(widget.amount),
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.green,
@@ -198,7 +198,7 @@ class _TransactionDetailState extends State<TransactionDetail> {
                 const SizedBox(width: 12),
                 Text(
                   widget.title,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 )
               ],
             ),

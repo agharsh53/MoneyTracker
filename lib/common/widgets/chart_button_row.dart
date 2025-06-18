@@ -6,7 +6,7 @@ class ChartButtonRow extends StatelessWidget {
   final String selectedChart;
   final Function(String) onChartSelected;
 
-  ChartButtonRow({
+  const ChartButtonRow({super.key, 
     required this.selectedChart,
     required this.onChartSelected,
   });
@@ -26,14 +26,14 @@ class ChartButtonRow extends StatelessWidget {
             selectedChart: selectedChart,
             onChartSelected: onChartSelected,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           ChartButton(
             icon: Icons.bar_chart,
             chartType: 'bar',
             selectedChart: selectedChart,
             onChartSelected: onChartSelected,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           ChartButton(
             icon: Icons.show_chart,
             chartType: 'line',

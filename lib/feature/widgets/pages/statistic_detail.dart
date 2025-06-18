@@ -99,31 +99,31 @@ class _StatisticDetailState extends State<StatisticDetail> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(onPressed: () {
                     Navigator.pop(context);
                   },
-                    child: Icon(Icons.keyboard_arrow_left, size: 40,
+                    child: const Icon(Icons.keyboard_arrow_left, size: 40,
                       color: Colors.black,),),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: ElevatedButton(onPressed: _showYearPicker,
-                      child: Text( _selectedYear.toString(), style: TextStyle(
-                          color: Coloors.backgroundLight,
-                          fontWeight: FontWeight.bold),),
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(11),),
-                          backgroundColor: Coloors.blueLight),),
+                          backgroundColor: Coloors.blueLight),
+                      child: Text( _selectedYear.toString(), style: TextStyle(
+                          color: Coloors.backgroundLight,
+                          fontWeight: FontWeight.bold),),),
 
                   ),
 
                 ],
               ),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
@@ -134,9 +134,9 @@ class _StatisticDetailState extends State<StatisticDetail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Total balance", style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 8),
-                    Text('${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome - _totalExpense)}', style: TextStyle(
+                    const Text("Total balance", style: TextStyle(fontSize: 16)),
+                    const SizedBox(height: 8),
+                    Text(NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome - _totalExpense), style: const TextStyle(
                         fontSize: 28, fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -145,9 +145,9 @@ class _StatisticDetailState extends State<StatisticDetail> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Expenses: ${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format( _totalExpense)}', style: TextStyle(
+                  Text('Expenses: ${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format( _totalExpense)}', style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w500)),
-                  Text("Income: ${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome)}", style: TextStyle(fontSize: 16,
+                  Text("Income: ${NumberFormat.currency(locale: 'en_IN', symbol: '₹',decimalDigits: 0).format(_totalIncome)}", style: const TextStyle(fontSize: 16,
                       fontWeight: FontWeight.w500,)),
                 ],
               ),
@@ -156,16 +156,16 @@ class _StatisticDetailState extends State<StatisticDetail> {
               // Table Header with Gradient
               Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [Coloors.blueDark, Colors.blueAccent],
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 padding: const EdgeInsets.symmetric(
                     vertical: 12, horizontal: 8),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     HeaderText("Month"),
                     HeaderText("Expend"),
                     HeaderText("Income"),
@@ -209,7 +209,7 @@ class _StatisticDetailState extends State<StatisticDetail> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: Text(month, style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),
+                                    child: Text(month, style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center,),
                                   ),
                                   TableText(expend.toDouble()),

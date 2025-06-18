@@ -7,7 +7,7 @@ class ChartButton extends StatelessWidget {
   final String selectedChart;
   final Function(String) onChartSelected;
 
-  ChartButton({
+  const ChartButton({super.key, 
     required this.icon,
     required this.chartType,
     required this.selectedChart,
@@ -21,7 +21,7 @@ class ChartButton extends StatelessWidget {
       child: InkWell(
         onTap: () => onChartSelected(chartType),
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: selectedChart == chartType
                 ? Colors.white
